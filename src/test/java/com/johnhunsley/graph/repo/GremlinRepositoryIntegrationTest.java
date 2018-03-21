@@ -1,8 +1,6 @@
 package com.johnhunsley.graph.repo;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
-import org.apache.tinkerpop.gremlin.structure.io.IoCore;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class GremlinRepositoryIntegrationTest {
         GraphTraversal t = gremlinRepository.getAllNodes();
         List results = t.toList();
 
-        for(int i = 0; i <= results.size(); i++) {
+        for(int i = 0; i < results.size(); i++) {
             System.out.println(results.get(i));
         }
     }

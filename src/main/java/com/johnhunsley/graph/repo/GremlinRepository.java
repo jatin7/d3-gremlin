@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * <p>
+ *     Executes Graph Traversal Queries on a provided {@link GraphTraversalSource} to return  {@link GraphTraversal}
+ *     instances which can be iterated
+ * </p>
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018

@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Profile;
 import java.io.IOException;
 
 /**
+ * <p>
+ *     A {@link GraphTraversalSourceProvider} which provides a {@link GraphTraversalSource} for an in-memory
+ *     TinkerGraph GraphML instance initialized from the air-routes-small.graphml
+ * </p>
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
@@ -18,12 +22,13 @@ import java.io.IOException;
 @Configuration
 @Profile("integrationTest")
 public class GraphTraversalSourceProviderTinkerGraphImpl implements GraphTraversalSourceProvider {
-    final String path = "air-routes-small.graphml";
+    final String path = "src/test/test-resources/air-routes-small.graphml";
 
     @Bean
     @Override
     public GraphTraversalSource provideSource() throws IOException {
         TinkerGraph tg = TinkerGraph.open();
+
         try {
             tg.io(IoCore.graphml()).readGraph(path);
             return  tg.traversal();

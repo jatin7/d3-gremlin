@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Profile;
  * in application.properties where a remote Graph end point is used ensure the following profile is active
  *
  * spring.profiles.active=remoteGraph
+ * gremlin.cluster.end-point=my-tinkerpop-endpoint
+ * gremlin.cluster.port=mytinkerpop-port
  *
  * @author John Hunsley
  *         jphunsley@gmail.com
