@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Profile;
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
- *         Time : 16:05
  */
 @Configuration
 @Profile("remoteGraph")

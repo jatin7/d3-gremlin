@@ -17,7 +17,6 @@ import java.util.List;
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
- *         Time : 10:27
  */
 @Service
 public class D3ServiceGremlinImpl implements D3Service {

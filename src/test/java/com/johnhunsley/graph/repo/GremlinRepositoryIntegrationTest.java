@@ -14,7 +14,6 @@ import java.util.List;
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
- *         Time : 15:26
  */
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

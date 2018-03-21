@@ -17,7 +17,6 @@ import java.io.IOException;
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
- *         Time : 16:11
  */
 @Configuration
 @Profile("integrationTest")

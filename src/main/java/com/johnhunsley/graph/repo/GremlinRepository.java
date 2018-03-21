@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * @author John Hunsley
  *         jphunsley@gmail.com
  *         Date : 21/03/2018
- *         Time : 10:11
  */
 @Component
 public class GremlinRepository {
