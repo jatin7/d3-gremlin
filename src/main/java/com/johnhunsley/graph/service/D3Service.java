@@ -11,5 +11,21 @@ import java.util.Iterator;
  */
 public interface D3Service {
 
+    /**
+     * <p>
+     *     Get all the {@link com.johnhunsley.graph.d3domain.Node}s in the Graph
+     * </p>
+     * @return {@link Result} containing the resulting nodes
+     */
     Result getAllNodes();
+
+    /**
+     * <p>
+     *     Get all the directly related {@link com.johnhunsley.graph.d3domain.Node}s to the given node name
+     *     related by out or in relationships
+     * </p>
+     * @param nodeName
+     * @return @return {@link Result} containing the resulting nodes and links
+     */
+    Result getNodeAndDirectRelations(String nodeName);
 }

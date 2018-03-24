@@ -29,7 +29,7 @@ public class GremlinRepositoryIntegrationTest {
         List results = t.toList();
 
         for(int i = 0; i < results.size(); i++) {
-            System.out.println(results.get(i));
+            System.out.println(results.get(i).toString());
         }
     }
 }

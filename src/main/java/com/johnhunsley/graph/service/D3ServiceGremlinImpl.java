@@ -28,10 +28,16 @@ public class D3ServiceGremlinImpl implements D3Service {
         GraphTraversal t = graphRepository.getAllNodes();
         List results = t.toList();
 
-        for(int i = 0; i <= results.size(); i++) {
+        for(int i = 0; i < results.size(); i++) {
             System.out.println(results.get(i));
         }
 
         return new Result();//translate the results from the traversal to d3 domain objects
+    }
+
+    @Override
+    public Result getNodeAndDirectRelations(final String nodeName) {
+        graphRepository.getLevelOneRelationships(nodeName);
+        return null;
     }
 }

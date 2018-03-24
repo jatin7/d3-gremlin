@@ -34,6 +34,7 @@ public class GraphTraversalSourceProviderRemoteImpl implements GraphTraversalSou
     @Bean
     @Override
     public GraphTraversalSource provideSource() {
+        System.out.println("######### Providing remote Graph Traversal Source from "+clusterEndPoint+":"+clusterPort);
         Cluster.Builder builder = Cluster.build();
         builder.addContactPoint(clusterEndPoint);
         builder.port(clusterPort);

@@ -24,4 +24,9 @@ public class GremlinRepository {
     public GraphTraversal getAllNodes() {
         return  g.V();
     }
+
+    public GraphTraversal getLevelOneRelationships(String nodeName) {
+        return null;
+//        return g.V(nodeName).repeat(bothE().bothV()).limit(1);
+    }
 }
