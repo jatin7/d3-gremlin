@@ -25,6 +25,10 @@ public class GremlinRepository {
         return  g.V();
     }
 
+    public GraphTraversal getAllEdges() {
+        return g.E();
+    }
+
     public GraphTraversal getLevelOneRelationships(String nodeName) {
         return null;
 //        return g.V(nodeName).repeat(bothE().bothV()).limit(1);

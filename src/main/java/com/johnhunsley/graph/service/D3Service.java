@@ -21,6 +21,14 @@ public interface D3Service {
 
     /**
      * <p>
+     *     Get all the Edges and Node ids
+     * </p>
+     * @return
+     */
+    Result getAllEdges();
+
+    /**
+     * <p>
      *     Get all the directly related {@link com.johnhunsley.graph.d3domain.Node}s to the given node name
      *     related by out or in relationships
      * </p>

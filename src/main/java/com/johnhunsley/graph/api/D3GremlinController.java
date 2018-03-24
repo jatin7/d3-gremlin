@@ -40,9 +40,29 @@ public class D3GremlinController {
         return new ResponseEntity<>(d3Service.getNodeAndDirectRelations(nodeName), HttpStatus.OK);
     }
 
+    /**
+     * <p>
+     *     Get all the Nodes in the Graph
+     * </p>
+     * @return {@Link ResponseEntity} containing the query {@Link Result}
+     */
     @CrossOrigin
     @RequestMapping(value = "allNodes", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Result> getAllNodes() {
         return new ResponseEntity<>(d3Service.getAllNodes(), HttpStatus.OK);
+    }
+
+
+    /**
+     * <p>
+     *     Get all the {@link com.johnhunsley.graph.d3domain.Link} instances and create {@Link Node} instances
+     *     from the ids specified in the {@link com.johnhunsley.graph.d3domain.Link} objects
+     * </p>
+     * @return {@Link ResponseEntity} containing the query {@Link Result}
+     */
+    @CrossOrigin
+    @RequestMapping(value = "allEdges", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Result> getAllEdgesAndNodeIds() {
+        return new ResponseEntity<>(d3Service.getAllEdges(), HttpStatus.OK);
     }
 }
