@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author John Hunsley
  *         jphunsley@gmail.com
@@ -28,8 +30,22 @@ public class GremlinRepositoryIntegrationTest {
         GraphTraversal t = gremlinRepository.getAllNodes();
         List results = t.toList();
 
-        for(int i = 0; i < results.size(); i++) {
-            System.out.println(results.get(i).toString());
+        for (Object result : results) {
+            System.out.println(result.toString());
         }
+
+        assertTrue(results.size() == 47);
+    }
+
+    @Test
+    public void testGetAllEdges() {
+        GraphTraversal t = gremlinRepository.getAllEdges();
+        List results = t.toList();
+
+        for (Object result : results) {
+            System.out.println(result.toString());
+        }
+
+        assertTrue(results.size() == 1326);
     }
 }
