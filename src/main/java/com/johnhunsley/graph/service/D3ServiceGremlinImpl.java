@@ -7,6 +7,7 @@ import com.johnhunsley.graph.repo.GremlinRepository;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,9 @@ public class D3ServiceGremlinImpl implements D3Service {
         for (Object result : results) {
             Vertex vertex = (Vertex) result;
             Node node = new Node(vertex.id().toString());
+            node.set_color("#59b5f2");
+//            VertexProperty prop = vertex.property("id");
+            node.setName(vertex.id().toString());
             response.addNode(node);
         }
 
@@ -54,14 +58,21 @@ public class D3ServiceGremlinImpl implements D3Service {
             Link link = new Link(edge.id().toString());
             Vertex target = edge.outVertex();
             link.setTid(target.id().toString());
+            Vertex source = edge.inVertex();
+            link.setSid(source.id().toString());
+            link.set_color("#90c6cc");
             response.addLink(link);
 
             //add the source and target nodes
+//            Result nodesResult = getAllNodes();
+//            response.setNodes(nodesResult.getNodes());
             Node targetNode = new Node(target.id().toString());
+            targetNode.set_color("#59b5f2");
+            targetNode.setName(target.id().toString());
             response.addNode(targetNode);
-            Vertex source = edge.inVertex();
-            link.setSid(source.id().toString());
             Node sourceNode = new Node(source.id().toString());
+            sourceNode.set_color("#59b5f2");
+            sourceNode.setName(source.id().toString());
             response.addNode(sourceNode);
         }
 

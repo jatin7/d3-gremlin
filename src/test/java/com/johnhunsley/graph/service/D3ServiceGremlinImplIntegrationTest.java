@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -35,8 +33,8 @@ public class D3ServiceGremlinImplIntegrationTest {
         Result result = d3Service.getAllEdges();
 
         SortedSet<Node> orderedNodes = new TreeSet<>((o1, o2) -> {
-            Integer int1 = new Integer(Integer.parseInt(o1.getId()));
-            Integer int2 = new Integer(Integer.parseInt(o2.getId()));
+            Integer int1 = Integer.parseInt(o1.getId());
+            Integer int2 = Integer.parseInt(o2.getId());
             return int1.compareTo(int2);
         });
 
@@ -46,8 +44,27 @@ public class D3ServiceGremlinImplIntegrationTest {
             System.out.println(node.getId());
         }
 
-        assertTrue(result.getNodes().size() == 46); //todo why is this 46 not 47????
+        assertTrue(result.getNodes().size() == 46);
         assertTrue(result.getLinks().size() == 1326);
+    }
+
+    @Test
+    public void testGetAllVerticies() {
+        Result result = d3Service.getAllNodes();
+
+        SortedSet<Node> orderedNodes = new TreeSet<>((o1, o2) -> {
+            Integer int1 = Integer.parseInt(o1.getId());
+            Integer int2 = Integer.parseInt(o2.getId());
+            return int1.compareTo(int2);
+        });
+
+        orderedNodes.addAll(result.getNodes());
+
+        for (Node node : orderedNodes) {
+            System.out.println(node.getName());
+        }
+
+        assertTrue(result.getNodes().size() == 47);
     }
 
 
