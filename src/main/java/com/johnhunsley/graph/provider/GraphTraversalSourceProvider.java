@@ -1,4 +1,4 @@
-package com.johnhunsley.graph;
+package com.johnhunsley.graph.provider;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 

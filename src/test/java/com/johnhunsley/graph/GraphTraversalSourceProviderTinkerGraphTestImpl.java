@@ -1,5 +1,6 @@
 package com.johnhunsley.graph;
 
+import com.johnhunsley.graph.provider.GraphTraversalSourceProvider;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.io.IoCore;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
@@ -20,8 +21,9 @@ import java.io.IOException;
  */
 @Configuration
 @Profile("integrationTest")
-public class GraphTraversalSourceProviderTinkerGraphImpl implements GraphTraversalSourceProvider {
-    final String path = "src/test/test-resources/air-routes-small.graphml";
+public class GraphTraversalSourceProviderTinkerGraphTestImpl implements GraphTraversalSourceProvider  {
+
+    final static String PATH = "src/test/test-resources/air-routes-small.graphml";
 
     @Bean
     @Override
@@ -29,11 +31,11 @@ public class GraphTraversalSourceProviderTinkerGraphImpl implements GraphTravers
         TinkerGraph tg = TinkerGraph.open();
 
         try {
-            tg.io(IoCore.graphml()).readGraph(path);
+            tg.io(IoCore.graphml()).readGraph(PATH);
             return  tg.traversal();
 
         } catch(IOException e) {
-            System.out.println("Graph "+path+" file not found");
+            System.out.println("Graph "+PATH+" file not found");
             throw e;
         }
     }
