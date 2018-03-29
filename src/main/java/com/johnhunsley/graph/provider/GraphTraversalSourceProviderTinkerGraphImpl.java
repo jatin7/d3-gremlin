@@ -32,6 +32,7 @@ public class GraphTraversalSourceProviderTinkerGraphImpl implements GraphTravers
     @Bean
     @Override
     public GraphTraversalSource provideSource() throws IOException {
+        System.out.println("######### Providing local Graph Traversal Source from path "+path);
         TinkerGraph tg = TinkerGraph.open();
 
         try {

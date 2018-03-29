@@ -37,7 +37,7 @@ public class D3GremlinController {
     @CrossOrigin
     @RequestMapping(value = "relatedNodes/{nodeName}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Result> getNodeAndDirectRelations(@PathVariable("nodeName") final String nodeName) {
-        return new ResponseEntity<>(d3Service.getNodeAndDirectRelations(nodeName), HttpStatus.OK);
+        return new ResponseEntity<>(d3Service.getFirstOrderRelatedNodes(nodeName), HttpStatus.OK);
     }
 
     /**

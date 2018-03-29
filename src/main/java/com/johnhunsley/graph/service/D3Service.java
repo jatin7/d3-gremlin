@@ -27,6 +27,8 @@ public interface D3Service {
      */
     Result getAllEdges();
 
+    Result getFirstOrderRelatedNodes(String nodeName);
+
     /**
      * <p>
      *     Get all the directly related {@link com.johnhunsley.graph.d3domain.Node}s to the given node name

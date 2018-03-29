@@ -38,8 +38,7 @@ public class D3ServiceGremlinImpl implements D3Service {
             Vertex vertex = (Vertex) result;
             Node node = new Node(vertex.id().toString());
             node.set_color("#59b5f2");
-//            VertexProperty prop = vertex.property("id");
-            node.setName(vertex.id().toString());
+            node.setName(vertex.property("desc").value().toString());
             response.addNode(node);
         }
 
@@ -64,15 +63,44 @@ public class D3ServiceGremlinImpl implements D3Service {
             response.addLink(link);
 
             //add the source and target nodes
-//            Result nodesResult = getAllNodes();
-//            response.setNodes(nodesResult.getNodes());
             Node targetNode = new Node(target.id().toString());
             targetNode.set_color("#59b5f2");
-            targetNode.setName(target.id().toString());
+            targetNode.setName(target.property("desc").value().toString());
             response.addNode(targetNode);
             Node sourceNode = new Node(source.id().toString());
             sourceNode.set_color("#59b5f2");
-            sourceNode.setName(source.id().toString());
+            sourceNode.setName(source.property("desc").value().toString());
+            response.addNode(sourceNode);
+        }
+
+        return response;
+    }
+
+    @Override
+    public Result getFirstOrderRelatedNodes(final String nodeName) {
+        GraphTraversal t = graphRepository.getLevelOneRelationships(nodeName);
+        List results = t.toList();
+        Result response = new Result();
+
+        for(Object result : results) {
+            //add the link
+            Edge edge = (Edge) result;
+            Link link = new Link(edge.id().toString());
+            Vertex target = edge.outVertex();
+            link.setTid(target.id().toString());
+            Vertex source = edge.inVertex();
+            link.setSid(source.id().toString());
+            link.set_color("#90c6cc");
+            response.addLink(link);
+
+            //add the source and target nodes
+            Node targetNode = new Node(target.id().toString());
+            targetNode.set_color("#59b5f2");
+            targetNode.setName(target.property("desc").value().toString());
+            response.addNode(targetNode);
+            Node sourceNode = new Node(source.id().toString());
+            sourceNode.set_color("#59b5f2");
+            sourceNode.setName(source.property("desc").value().toString());
             response.addNode(sourceNode);
         }
 

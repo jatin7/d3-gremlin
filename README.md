@@ -35,6 +35,8 @@ remoteGraph uses the GraphTraversalSourceProviderRemoteImpl class which will pro
  - gremlin.cluster.end-point
  - gremlin.cluster.port
 
+Note: the integrationTest profile will run a local TinkerGraph at a fixed location specified in test-resources
+
 For EC2 UserData - execution on start up, use nohup in the following script
  `#!/bin/bash
  nohup /usr/bin/java -jar /home/ec2-user/returns-1.0.jar --spring.config.name=/home/ec2-user/lymm.application.properties & > /home/ec2-user/nohup.out

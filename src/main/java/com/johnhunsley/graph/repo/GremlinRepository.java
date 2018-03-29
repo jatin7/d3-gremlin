@@ -29,8 +29,14 @@ public class GremlinRepository {
         return g.E();
     }
 
+    /**
+     * <p>
+     *      g.V().has("desc","nodeName").bothE()
+     * </p>
+     * @param nodeName
+     * @return
+     */
     public GraphTraversal getLevelOneRelationships(String nodeName) {
-        return null;
-//        return g.V(nodeName).repeat(bothE().bothV()).limit(1);
+        return g.V().has("desc", nodeName).bothE();
     }
 }

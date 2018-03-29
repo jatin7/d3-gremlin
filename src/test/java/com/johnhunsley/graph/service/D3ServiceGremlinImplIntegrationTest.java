@@ -67,5 +67,26 @@ public class D3ServiceGremlinImplIntegrationTest {
         assertTrue(result.getNodes().size() == 47);
     }
 
+    @Test
+    public void getFirstOrderRelatedNodes() {
+        Result result = d3Service.getFirstOrderRelatedNodes("Seattle-Tacoma");
+
+        SortedSet<Node> orderedNodes = new TreeSet<>((o1, o2) -> {
+            Integer int1 = Integer.parseInt(o1.getId());
+            Integer int2 = Integer.parseInt(o2.getId());
+            return int1.compareTo(int2);
+        });
+
+        orderedNodes.addAll(result.getNodes());
+
+        for (Node node : orderedNodes) {
+            System.out.println(node.getId());
+        }
+
+        assertTrue(result.getNodes().size() == 38);
+        assertTrue(result.getLinks().size() == 74);
+
+    }
+
 
 }
