@@ -37,7 +37,7 @@ public class D3GremlinController {
     @CrossOrigin
     @RequestMapping(value = "relatedNodes/{nodeName}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Result> getNodeAndDirectRelations(@PathVariable("nodeName") final String nodeName) {
-        return new ResponseEntity<>(d3Service.getFirstOrderRelatedNodes(nodeName), HttpStatus.OK);
+        return new ResponseEntity<>(d3Service.getFirstOrderRelatedNodes(nodeName, null), HttpStatus.OK);
     }
 
     /**
@@ -64,5 +64,18 @@ public class D3GremlinController {
     @RequestMapping(value = "allEdges", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Result> getAllEdgesAndNodeIds() {
         return new ResponseEntity<>(d3Service.getAllEdges(), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "path/{source}/{target}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Result> getShortestPathAndNearest(@PathVariable("source") final String source,
+                                                            @PathVariable("target") final String target) {
+        try {
+            return new ResponseEntity<>(d3Service.getShortestPathAndNearestNodes(source, target), HttpStatus.OK);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
