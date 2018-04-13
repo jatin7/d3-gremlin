@@ -67,11 +67,12 @@ public class D3GremlinController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "path/{source}/{target}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "path/{source}/{target}/{limit}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Result> getShortestPathAndNearest(@PathVariable("source") final String source,
-                                                            @PathVariable("target") final String target) {
+                                                            @PathVariable("target") final String target,
+                                                            @PathVariable("limit") final int limit) {
         try {
-            return new ResponseEntity<>(d3Service.getShortestPathAndNearestNodes(source, target), HttpStatus.OK);
+            return new ResponseEntity<>(d3Service.getShortestPathAndNearestNodes(source, target, limit), HttpStatus.OK);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

@@ -38,7 +38,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .configure(http)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll() //todo put some security on endpoints
-//                .antMatchers("api/**").fullyAuthenticated()
+                .antMatchers("api/**").fullyAuthenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

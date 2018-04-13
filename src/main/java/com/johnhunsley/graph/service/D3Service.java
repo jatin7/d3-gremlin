@@ -46,10 +46,11 @@ public interface D3Service {
      * </p>
      * @param sourceNodeName
      * @param targetNodeName
+     * @param limit - the number of shortest paths to display
      * @return
      * @throws ClassNotFoundException
      */
-    Result getShortestPath(String sourceNodeName, String targetNodeName) throws ClassNotFoundException;
+    Result getShortestPath(String sourceNodeName, String targetNodeName, int limit) throws ClassNotFoundException;
 
     /**
      * <p>
@@ -57,9 +58,10 @@ public interface D3Service {
      * </p>
      * @param sourceNodeName
      * @param targetNodeName
+     * @param limit - the number of shortest paths to display
      * @return
      * @throws ClassNotFoundException
      */
     Result getShortestPathAndNearestNodes(String sourceNodeName,
-                                          String targetNodeName) throws ClassNotFoundException;
+                                          String targetNodeName, int limit) throws ClassNotFoundException;
 }

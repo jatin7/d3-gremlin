@@ -92,7 +92,7 @@ public class D3ServiceGremlinImplIntegrationTest {
     @Test
     public void testShortestPath() {
         try {
-            Result result = d3Service.getShortestPath("Long Beach Airport", "Santa Fe");
+            Result result = d3Service.getShortestPath("Long Beach Airport", "Santa Fe", 50);
 
             SortedSet<Node> orderedNodes = new TreeSet<>((o1, o2) -> {
                 Integer int1 = Integer.parseInt(o1.getId());
@@ -106,8 +106,8 @@ public class D3ServiceGremlinImplIntegrationTest {
                 System.out.println(node.getId());
             }
 
-            assertTrue(result.getNodes().size() == 5);
-            assertTrue(result.getLinks().size() == 7);
+            assertTrue(result.getNodes().size() == 10);
+            assertTrue(result.getLinks().size() == 37);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class D3ServiceGremlinImplIntegrationTest {
     @Test
     public void testGetShortestPathAndNearestNodes() {
         try {
-            Result result = d3Service.getShortestPathAndNearestNodes("Long Beach Airport", "Santa Fe");
+            Result result = d3Service.getShortestPathAndNearestNodes("Long Beach Airport", "Santa Fe", 50);
 
             SortedSet<Node> orderedNodes = new TreeSet<>((o1, o2) -> {
                 Integer int1 = Integer.parseInt(o1.getId());
@@ -132,8 +132,8 @@ public class D3ServiceGremlinImplIntegrationTest {
                 System.out.println(node.getId());
             }
 
-            assertTrue(result.getNodes().size() == 43);
-            assertTrue(result.getLinks().size() == 238);
+            assertTrue(result.getNodes().size() == 45);
+            assertTrue(result.getLinks().size() == 526);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

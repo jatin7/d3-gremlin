@@ -39,8 +39,8 @@ public class GremlinRepository {
      * @param nodeName
      * @return
      */
-    public GraphTraversal getLevelOneRelationships(final String nodeName) {
-        return g.V().has("desc", nodeName).bothE();
+    public GraphTraversal getLevelOneRelationships(final String nodeName, final String nodeNameLabel) {
+        return g.V().has(nodeNameLabel, nodeName).bothE();
     }
 
     /**
@@ -51,8 +51,8 @@ public class GremlinRepository {
      * @param targetNodeName
      * @return
      */
-    public GraphTraversal getShortestPath(final String sourceNodeName, final String targetNodeName) {
-        return g.V().has("desc", sourceNodeName)
-                .repeat(bothE().bothV()).until(has("desc", targetNodeName)).path().limit(4);
+    public GraphTraversal getShortestPath(final String sourceNodeName, final String targetNodeName, final String nodeNameLabel, final int limit) {
+        return g.V().has(nodeNameLabel, sourceNodeName)
+                .repeat(bothE().bothV()).until(has(nodeNameLabel, targetNodeName)).path().limit(limit);
     }
 }

@@ -11,6 +11,7 @@ import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,10 @@ public class D3ServiceGremlinImpl implements D3Service {
     @Autowired
     private GremlinRepository graphRepository;
 
+    @Value("${graph.node.name.label}")
+    private String nodeNameLabel;
+
+
     public Result getAllNodes() {
         GraphTraversal t = graphRepository.getAllNodes();
         List results = t.toList();
@@ -42,7 +47,7 @@ public class D3ServiceGremlinImpl implements D3Service {
 
         for (Object result : results) {
             Vertex vertex = (Vertex) result;
-            response.addNode(transformVertex(vertex, "#59b5f2", "desc"));
+            response.addNode(transformVertex(vertex, "#59b5f2", nodeNameLabel));
         }
 
         return response;
@@ -60,10 +65,10 @@ public class D3ServiceGremlinImpl implements D3Service {
 
             //add the source and target nodes
             Vertex target = edge.outVertex();
-            response.addNode(transformVertex(target, "#59b5f2", "desc"));
+            response.addNode(transformVertex(target, "#59b5f2", nodeNameLabel));
 
             Vertex source = edge.inVertex();
-            response.addNode(transformVertex(source, "#59b5f2", "desc"));
+            response.addNode(transformVertex(source, "#59b5f2", nodeNameLabel));
         }
 
         return response;
@@ -142,7 +147,7 @@ public class D3ServiceGremlinImpl implements D3Service {
 
     @Override
     public Result getFirstOrderRelatedNodes(final String nodeName, Result response) {
-        GraphTraversal t = graphRepository.getLevelOneRelationships(nodeName);
+        GraphTraversal t = graphRepository.getLevelOneRelationships(nodeName, nodeNameLabel);
         List results = t.toList();
         if(response == null) response = new Result();
 
@@ -153,10 +158,10 @@ public class D3ServiceGremlinImpl implements D3Service {
 
             //add the source and target nodes
             Vertex target = edge.outVertex();
-            response.addNode(transformVertex(target, "#59b5f2", "desc"));
+            response.addNode(transformVertex(target, "#59b5f2", nodeNameLabel));
 
             Vertex source = edge.inVertex();
-            response.addNode(transformVertex(source, "#59b5f2", "desc"));
+            response.addNode(transformVertex(source, "#59b5f2", nodeNameLabel));
         }
 
         return response;
@@ -165,12 +170,12 @@ public class D3ServiceGremlinImpl implements D3Service {
 
     @Override
     public Result getShortestPath(final String sourceNodeName,
-                                  final String targetNodeName) throws ClassNotFoundException {
-        GraphTraversal t = graphRepository.getShortestPath(sourceNodeName, targetNodeName);
+                                  final String targetNodeName, final int limit) throws ClassNotFoundException {
+        GraphTraversal t = graphRepository.getShortestPath(sourceNodeName, targetNodeName, nodeNameLabel, limit);
         Result result = new Result();
 
         for(Object obj : t.toList()) {
-            transformPath((Path)obj, result, "#90c6cc", "desc", "#ed4754");
+            transformPath((Path)obj, result, "#90c6cc", nodeNameLabel, "#ed4754");
         }
 
         return result;
@@ -178,8 +183,8 @@ public class D3ServiceGremlinImpl implements D3Service {
 
     @Override
     public Result getShortestPathAndNearestNodes(final String sourceNodeName,
-                                                 final String targetNodeName) throws ClassNotFoundException {
-        Result result = getShortestPath(sourceNodeName, targetNodeName);
+                                                 final String targetNodeName, final int limit) throws ClassNotFoundException {
+        Result result = getShortestPath(sourceNodeName, targetNodeName, limit);
         Set<Node> pathNodes = new HashSet<>();
         pathNodes.addAll(result.getNodes());
 
